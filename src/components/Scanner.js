@@ -8,7 +8,8 @@ import { MinimalSpinner, Waves } from "loading-animations-react";
 export default function Scanner() {
     const params = useParams();
     const [jobUrl, setJobUrl] = useState("");
-    const [result, setResult] = useState("");
+    const [result, setResult] = useState(0);
+    const [resultText, setResultText] = useState("");
 
     useEffect(() => {
         const starsRef = ref(storage, `root` + `/` + `${params.job_name}` + `/` + `Job Description` + `/` + `jobDescription.pdf`);
@@ -67,8 +68,17 @@ export default function Scanner() {
     }, [file, upload]);
 
     const scanResume = () => {
+        document.getElementById("scanButton").innerHTML = "Scanning...";
+        document.getElementById("scanButton").setAttribute("disabled", true);
         Axios.get("http://127.0.0.1:5000/scan?job=" + params.job_name).then((response) => {
+            document.getElementById("scanButton").innerHTML = "Scan Resume";
+            document.getElementById("scanButton").disabled = false;
             setResult(response["data"])
+            setResultText("Your matched percentage with above job description : "+response["data"]+" %")
+        }).catch((e) => {
+            setResultText("Error in fetching data from server");
+            document.getElementById("scanButton").innerHTML = "Scan Resume";
+            document.getElementById("scanButton").disabled = false;
         })
     }
 
@@ -143,10 +153,10 @@ export default function Scanner() {
                             <div className="container position-relative">
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-lg-6 text-center">
-                                        <div id="resul_alert" className={parseFloat(result) < 30.0 ? "alert alert-danger" : (parseFloat(result) < 60.0 ? "alert alert-warning" : "alert alert-success")} role="alert" hidden={result ? false : true}>
-                                            Your matched percentage with above job description : <b>{result}</b> %
+                                        <div id="resul_alert" className={parseFloat(result) < 30.0 ? "alert alert-danger" : (parseFloat(result) < 60.0 ? "alert alert-warning" : "alert alert-success")} role="alert" hidden={resultText ? false : true}>
+                                            {resultText}
                                         </div>
-                                        <button type="button" className="btn btn-success btn-lg" onClick={scanResume} disabled={fileUrl ? false : true} hidden={result ? true : false} >Scan Resume</button>
+                                        <button type="button" id="scanButton" className="btn btn-success btn-lg" onClick={scanResume} disabled={fileUrl ? false : true} hidden={result ? true : false} >Scan Resume</button>
                                     </div>
                                 </div>
                             </div>
