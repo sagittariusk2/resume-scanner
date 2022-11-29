@@ -4,6 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
+/backend/firebaseConfig.py
+/backend/resume-scanner-dbac5-firebase-adminsdk-5xjf1-f00f13e242.json
+/backend/env
+/backend/__pycache__
+/backend/job_resume.pdf
+/backend/job.pdf
+/src/firebaseConfig.js
 
 # testing
 /coverage
