@@ -82,7 +82,10 @@ export default function CreateJob() {
                                 <input type="text" onChange={handleJobChange} className="form-control" name="subject" id="subject" value={job} placeholder="Job Name" required />
                             </div>
                             <div className="form-group mt-3">
-                                <input type="file" onChange={handleFileChange} required accept=".pdf" />
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload Job Description</label>
+                                    <input class="form-control" type="file" id="formFile" onChange={handleFileChange} required accept=".pdf" />
+                                </div>
                             </div>
                             <div className="page-header d-flex align-items-center">
                                 <div className="container position-relative">
