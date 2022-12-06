@@ -8,7 +8,7 @@ export default function Footer() {
                     &copy; Copyright <strong><span>ResumeScanner</span></strong>. All Rights Reserved
                 </div>
                 <div className="credits">
-                    Designed by Ritesh Ranjan && Rohit Lohar && Chhote Lal Kumar
+                    Designed by Ritesh Ranjan & Rohit Lohar & Chhote Lal Kumar
                 </div>
             </div>
         </footer>

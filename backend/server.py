@@ -75,10 +75,25 @@ def getJob(inp):
                 ans = (downJob(file, ".doc"))
     return ans
 
+def findIndexOfJobDesc(job):
+    # job description
+    for i in range(max(0, len(job)-16)):
+        x = job[i:16+i].lower()
+        if "job description" in x:
+            return i+15
+        if "description" in x:
+            return i+11
+        if "requirements" in x:
+            return i+12
+        if "responsibilities" in x:
+            return i+16
+    return 0
+
 def getDesc(job):
     job = getJob(job)
     job = readFile(job)
-    desc=job[0:min(len(job),300)]+"..."
+    index = findIndexOfJobDesc(job)
+    desc = job[index:index+min(len(job),200)]+"..."
     return desc
 
 @app.route("/scan")
@@ -90,18 +105,16 @@ def scan():
     else:
         return "0.00"
 
-@app.route("/summery")
+@app.route("/getSummary")
 def summery():
     args = request.args
     args = args["jobs"]
-    print(args)
-    args = args.split('>')
-    print(args)
+    args = args.split('<')
     ans = dict()
     for i in range(len(args)):
-        ans[i] = getDesc(args[i])
+        if(len(args[i])>0):
+            ans[i] = getDesc(args[i])
     return ans
-
 
 if __name__=="__main__":
     app.run(debug=True)

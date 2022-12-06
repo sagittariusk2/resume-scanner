@@ -10,21 +10,10 @@ export default function Navbar() {
                     <h1>ResumeScanner</h1>
                 </a>
 
-                <nav id="navbar" className="navbar">
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                    </ul>
+                <nav className="navbar navbar-light bg-black">
+                    <a href="/" className="navbar-brand mb-0 text-light"><span className="bi bi-house"></span></a>
+                    <a href="/about" className="navbar-brand mb-0 text-light"><span className="bi bi-people"></span></a>
                 </nav>
-
-                <div className="header-social-links">
-                    <a href="/" className="twitter"><i className="bi bi-twitter"></i></a>
-                    <a href="/" className="facebook"><i className="bi bi-facebook"></i></a>
-                    <a href="/" className="instagram"><i className="bi bi-instagram"></i></a>
-                    <a href="/" className="linkedin"><i className="bi bi-linkedin"></i></a>
-                </div>
-                <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-                <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
             </div>
         </header>
